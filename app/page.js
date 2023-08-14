@@ -1,17 +1,23 @@
 'use client';
 import styles from './page.module.css';
 import Link from 'next/link';
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { fetchPosts } from './store/slices/posts';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function Home() {
 	const posts = useSelector((state) => state.posts.posts);
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(fetchPosts());
+	}, [dispatch]);
 
 	const renderPosts = () => {
 		if (posts.length > 0) {
 			return posts.map((post) => {
 				return (
-					<li className='list-group-item' key={post.id}>
-						<Link href={`/posts/${post.id}`}>{post.title}</Link>
+					<li className='list-group-item' key={post._id}>
+						<Link href={`/posts/${post._id}`}>{post.title}</Link>
 					</li>
 				);
 			});

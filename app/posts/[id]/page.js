@@ -2,21 +2,32 @@
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
-import { deletePost } from '../../store/slices/posts';
+import { deletePost, fetchPost } from '../../store/slices/posts';
+import { useEffect } from 'react';
 
 const PostsShow = () => {
+	const post = useSelector((state) => state.posts.posts);
 	const { id } = useParams();
 	const router = useRouter();
 	const dispatch = useDispatch();
-	const post = useSelector(({ posts }) => {
-		return posts.posts.find((post) => {
-			return post.id === parseInt(id);
-		});
-	});
+
+	useEffect(() => {
+		dispatch(fetchPost(id));
+	}, [dispatch, id]);
 
 	const onDeleteClick = () => {
-		dispatch(deletePost(id));
+		dispatch(deletePost(`_${id}`));
 		router.push('/');
+	};
+
+	const renderCategories = () => {
+		return post?.categories?.map?.((category) => {
+			return (
+				<span className='label label-primary' key={category}>
+					{category}
+				</span>
+			);
+		});
 	};
 
 	return (
@@ -33,7 +44,9 @@ const PostsShow = () => {
 			<br></br>
 			<br></br>
 			<h3>{post?.title}</h3>
-			{/* <h6><strong>Categories:</strong> {renderCategories()}</h6> */}
+			<h6>
+				<strong>Categories:</strong> {renderCategories()}
+			</h6>
 			<p>{post?.content}</p>
 		</div>
 	);
