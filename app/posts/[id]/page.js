@@ -20,7 +20,7 @@ const PostsShow = () => {
 	};
 
 	const renderCategories = () => {
-		return (post.categories || []).map((category, i) => {
+		return (post?.categories || []).map((category, i) => {
 			if (post.categories.length - 1 === i) {
 				return <span key={i}>{category}</span>;
 			} else {
