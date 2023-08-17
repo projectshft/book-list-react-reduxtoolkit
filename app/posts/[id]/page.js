@@ -19,6 +19,16 @@ const PostsShow = () => {
 		router.push('/');
 	};
 
+	const renderCategories = () => {
+		return (post.categories || []).map((category, i) => {
+			if (post.categories.length - 1 === i) {
+				return <span key={i}>{category}</span>;
+			} else {
+				return <span key={i}>{category}, </span>;
+			}
+		});
+	};
+
 	return (
 		<div>
 			<Link href='/'>Back To Index</Link>
@@ -33,7 +43,9 @@ const PostsShow = () => {
 			<br></br>
 			<br></br>
 			<h3>{post?.title}</h3>
-			{/* <h6><strong>Categories:</strong> {renderCategories()}</h6> */}
+			<h6>
+				<strong>Categories:</strong> {renderCategories()}
+			</h6>
 			<p>{post?.content}</p>
 		</div>
 	);
