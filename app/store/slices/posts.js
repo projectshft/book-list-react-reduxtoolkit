@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-const ROOT_URL = 'https://parsity-blog-server.herokuapp.com';
+const ROOT_URL = '/api';
 
 // Async action using createAsyncThunk
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
@@ -30,13 +30,6 @@ export const postsSlice = createSlice({
 		posts: [],
 		status: 'idle', // to track loading state
 		error: null,
-	},
-	reducers: {
-		deletePost: (state, action) => {
-			state.posts = state.posts.filter(
-				(post) => post.id !== parseInt(action.payload)
-			);
-		},
 	},
 	extraReducers: (builder) => {
 		builder

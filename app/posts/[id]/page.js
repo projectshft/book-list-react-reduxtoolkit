@@ -16,7 +16,7 @@ const PostsShow = () => {
 	}, [dispatch, id]);
 
 	const onDeleteClick = () => {
-		dispatch(deletePost(`_${id}`));
+		dispatch(deletePost(id));
 		router.push('/');
 	};
 
