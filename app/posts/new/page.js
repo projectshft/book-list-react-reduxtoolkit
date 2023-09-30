@@ -13,7 +13,15 @@ const PostsNew = () => {
 
 	const handleFormSubmit = (e) => {
 		e.preventDefault();
-		dispatch(createPost({ title, categories, content }));
+		const id = Math.floor(Math.random() * 1000000000);
+		dispatch(
+			createPost({
+				title,
+				categories,
+				content,
+				id,
+			})
+		);
 		router.push('/');
 	};
 

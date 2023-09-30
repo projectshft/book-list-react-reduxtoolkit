@@ -1,20 +1,22 @@
 'use client';
 import Link from 'next/link';
+import { useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
 import { deletePost, fetchPost } from '../../store/slices/posts';
-import { useEffect } from 'react';
 
 const PostsShow = () => {
 	const { id } = useParams();
+
 	const router = useRouter();
+
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(fetchPost(id));
 	}, [dispatch, id]);
 
-	const post = useSelector((state) => state.posts.posts);
+	const post = useSelector((state) => state.posts.post);
 
 	const onDeleteClick = () => {
 		dispatch(deletePost(id));
