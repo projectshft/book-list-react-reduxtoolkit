@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 
 export async function GET(req, { params }) {
 	const { id } = params;
-	const post = await posts.find((post) => post._id === id);
+	const post = posts.find((post) => post._id === id);
 	if (!post) {
 		return new Response('Invalid ID', {
 			status: 400,

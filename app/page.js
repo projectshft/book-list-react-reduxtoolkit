@@ -6,11 +6,12 @@ import { fetchPosts } from './store/slices/posts';
 import { useDispatch, useSelector } from 'react-redux';
 
 export default function Home() {
-	const posts = useSelector((state) => state.posts.posts);
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(fetchPosts());
 	}, [dispatch]);
+
+	const posts = useSelector((state) => state.posts.posts);
 
 	const renderPosts = () => {
 		if (posts.length > 0) {

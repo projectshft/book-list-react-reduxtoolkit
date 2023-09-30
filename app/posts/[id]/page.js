@@ -6,7 +6,6 @@ import { deletePost, fetchPost } from '../../store/slices/posts';
 import { useEffect } from 'react';
 
 const PostsShow = () => {
-	const post = useSelector((state) => state.posts.posts);
 	const { id } = useParams();
 	const router = useRouter();
 	const dispatch = useDispatch();
@@ -14,6 +13,8 @@ const PostsShow = () => {
 	useEffect(() => {
 		dispatch(fetchPost(id));
 	}, [dispatch, id]);
+
+	const post = useSelector((state) => state.posts.posts);
 
 	const onDeleteClick = () => {
 		dispatch(deletePost(id));
