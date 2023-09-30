@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 
 export async function GET(req, { params }) {
 	const { id } = params;
-	const post = await posts.find((post) => post._id === id);
+	const post = posts.find((post) => post._id === id);
 	if (!post) {
 		return new Response('Invalid ID', {
 			status: 400,
@@ -14,7 +14,7 @@ export async function GET(req, { params }) {
 
 export async function DELETE(req, { params }) {
 	const { id } = params;
-	const postIndex = await posts.findIndex((p) => p._id === id);
+	const postIndex = posts.findIndex((p) => p._id === id);
 
 	posts.splice(postIndex, 1);
 	return NextResponse.json({ id });
